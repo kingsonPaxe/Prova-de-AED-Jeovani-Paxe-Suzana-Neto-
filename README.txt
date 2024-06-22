@@ -3,7 +3,7 @@ Jeovani Paxe
 Suzana Neto
 
 ****************************** Exercicio ********************************
-
+    Fazer um algoritimo para simular Filas, grafos, arvores com interface grafica!
 
 ****************************** Lib Instaladas ****************************
                     
