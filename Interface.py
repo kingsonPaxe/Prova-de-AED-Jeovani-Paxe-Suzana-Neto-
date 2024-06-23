@@ -29,6 +29,7 @@ class App(ctk.CTk):
         #Chamando cada Tela
         self.MenuBarGrafos()
         self.MenuBarFila()
+        self.MenuArvore()
     #Criando a Tela Fila
     def MenuBarFila(self):
         self.input = ctk.CTkEntry(self.tb_fila, placeholder_text='Insira um valor na lista',font=('', 12))
@@ -110,7 +111,7 @@ class App(ctk.CTk):
 
         self.input2 = ctk.CTkEntry(self.tb_grafos, placeholder_text='No 2',font=('', 12))
         self.input2.pack(pady=10)
-        self.btn_arestras = ctk.CTkButton(self.tb_grafos, text='Add aresta', command=self.add_aresta, font=('', 12))
+        self.btn_arestras = ctk.CTkButton(self.tb_grafos, text='Adicionar aresta', command=self.add_aresta, font=('', 12))
         self.btn_arestras.pack(pady=10)
 
         # A parte onde vai ficar o resultado do grafos
@@ -145,6 +146,13 @@ class App(ctk.CTk):
         self.destroy()
         plt.close('all')
 
+
+    # Interface da Arvore
+    def MenuArvore(self):
+        self.arvore = ArvoreBinariaBusca()
+        self.tela_arvore = TreeVisualizer(self.tb_arvore,tree=self.arvore)
+        self.tela_arvore.pack(expand=True, fill = ctk.BOTH)
+        pass
 if __name__=="__main__":
     app = App()
     app.mainloop()

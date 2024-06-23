@@ -1,9 +1,7 @@
-import tkinter.messagebox
-import customtkinter 
-import tkinter
+from Libs import *
 
-customtkinter.set_appearance_mode("dark")
-customtkinter.set_default_color_theme("dark-blue")
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("dark-blue")
 
 
 class No:
@@ -141,46 +139,48 @@ class ArvoreBinariaBusca(BinaryTree):
 
 ####################################################3  CTkCanvas
 
-class TreeVisualizer(customtkinter.CTkScrollableFrame):
+class TreeVisualizer(ctk.CTkScrollableFrame):
     def __init__(self, master=None, tree=None):
         super().__init__(master)
-        self.master = master
+        # self.master = master
         self.tree = tree
-        self.master.title("Visualização da Árvore Binária")
+        # self.master.title("Visualização da Árvore Binária")
         self.canvas_width = 800
         self.canvas_height = 650
         self.create_widgets()
         
     def create_widgets(self):
-        self.canvas = customtkinter.CTkCanvas(self, width=self.canvas_width, height=self.canvas_height, bg="white")
-        self.canvas.pack(expand=True, fill=customtkinter.BOTH)
+
+
+        self.canvas = ctk.CTkCanvas(self)
+        self.canvas.pack(expand=True, fill=ctk.BOTH)
 
         # Frame para entrada de dados
-        input_frame = customtkinter.CTkCanvas(self)
-        input_frame.pack()
+        input_frame = ctk.CTkFrame(self, height=200, width=500)
+        input_frame.pack(pady=20)
 
-        self.entry_valor = customtkinter.CTkEntry(input_frame,placeholder_text='Insira um valor na árvore',  font=("", 14))
-        self.entry_valor.pack(side=customtkinter.LEFT,padx=2)       
-        btn_inserir = customtkinter.CTkButton(input_frame, text="Inserir", command=self.inserir_valor)
-        btn_inserir.pack(side=customtkinter.LEFT,padx=10)
+        self.entry_valor = ctk.CTkEntry(input_frame,placeholder_text='Insira um valor na árvore',  font=("", 14))
+        self.entry_valor.pack(side=ctk.LEFT,padx=2)       
+        btn_inserir = ctk.CTkButton(input_frame, text="Inserir", command=self.inserir_valor)
+        btn_inserir.pack(side=ctk.LEFT,padx=10)
         ## botao remover nó
-        btn_remover= customtkinter.CTkButton(input_frame, text="remover", command=self.remover_valor)
-        btn_remover.pack(side=customtkinter.LEFT, padx=10)
+        btn_remover= ctk.CTkButton(input_frame, text="remover", command=self.remover_valor)
+        btn_remover.pack(side=ctk.LEFT, padx=10)
 
         
         # Frame para exibição dos percursos
-        percurso_frame = customtkinter.CTkFrame(self)
+        percurso_frame = ctk.CTkFrame(self)
         percurso_frame.pack(pady=10)
 
-        self.txt_em_ordem = customtkinter.CTkTextbox(percurso_frame, width=400, height=300, wrap=customtkinter.WORD)
-        self.txt_em_ordem.pack(side=customtkinter.LEFT, padx=10)
+        self.txt_em_ordem = ctk.CTkTextbox(percurso_frame, width=400, height=300, wrap=ctk.WORD)
+        self.txt_em_ordem.pack(side=ctk.LEFT, padx=10)
         
         
-        self.txt_pre_ordem = customtkinter.CTkTextbox(percurso_frame, width=400, height=300, wrap=customtkinter.WORD)
-        self.txt_pre_ordem.pack(side=customtkinter.LEFT, padx=10)
+        self.txt_pre_ordem = ctk.CTkTextbox(percurso_frame, width=400, height=300, wrap=ctk.WORD)
+        self.txt_pre_ordem.pack(side=ctk.LEFT, padx=10)
         
-        self.txt_pos_ordem = customtkinter.CTkTextbox(percurso_frame, width=400, height=300, wrap=customtkinter.WORD)
-        self.txt_pos_ordem.pack(side=customtkinter.LEFT, padx=10)
+        self.txt_pos_ordem = ctk.CTkTextbox(percurso_frame, width=400, height=300, wrap=ctk.WORD)
+        self.txt_pos_ordem.pack(side=ctk.LEFT, padx=10)
 
 
         
@@ -193,16 +193,16 @@ class TreeVisualizer(customtkinter.CTkScrollableFrame):
         
         # Atualiza as áreas de texto dos percursos
         em_ordem = self.tree.em_ordem_erd()
-        self.txt_em_ordem.delete("1.0", customtkinter.END)
-        self.txt_em_ordem.insert(customtkinter.END, "Em Ordem (ERD):\n" + ", ".join(map(str, em_ordem)))
+        self.txt_em_ordem.delete("1.0", ctk.END)
+        self.txt_em_ordem.insert(ctk.END, "Em Ordem (ERD):\n" + ", ".join(map(str, em_ordem)))
 
         pre_ordem = self.tree.pre_ordem()
-        self.txt_pre_ordem.delete("1.0", customtkinter.END)
-        self.txt_pre_ordem.insert(customtkinter.END, "Pré-Ordem:\n" + ", ".join(map(str, pre_ordem)))
+        self.txt_pre_ordem.delete("1.0", ctk.END)
+        self.txt_pre_ordem.insert(ctk.END, "Pré-Ordem:\n" + ", ".join(map(str, pre_ordem)))
         
         pos_ordem = self.tree.pos_ordem_edr()
-        self.txt_pos_ordem.delete("1.0", customtkinter.END)
-        self.txt_pos_ordem.insert(customtkinter.END, "Pós-Ordem (EDR):\n" + ", ".join(map(str, pos_ordem)))
+        self.txt_pos_ordem.delete("1.0", ctk.END)
+        self.txt_pos_ordem.insert(ctk.END, "Pós-Ordem (EDR):\n" + ", ".join(map(str, pos_ordem)))
 
         
     def draw_node(self, node, x, y, h_space):
@@ -262,9 +262,9 @@ class TreeVisualizer(customtkinter.CTkScrollableFrame):
       
 def main():
     arvore = ArvoreBinariaBusca()
-    root = customtkinter.CTk()
+    root = ctk.CTk()
     app = TreeVisualizer(master=root, tree=arvore)
-    app.pack(expand=True, fill=customtkinter.BOTH)
+    app.pack(expand=True, fill=ctk.BOTH)
     root.mainloop()
 
 if __name__ == "__main__":
