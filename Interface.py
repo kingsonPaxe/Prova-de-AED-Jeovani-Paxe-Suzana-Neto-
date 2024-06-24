@@ -1,11 +1,12 @@
 from Libs import *
+from Arvorebinaria import*
 
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
 
         #Configurando a tela
-        self.geometry("1000x600")
+        self.geometry("1000x800")
         # self.resizable(0,0)
         self.title('Simulação de uma ED')
         
@@ -17,7 +18,7 @@ class App(ctk.CTk):
         # Minha barra de navegacao
         self.MenuBar()
 
-    #Criando o menuBar
+    #Criando o menuBar  CTkTabview
     def MenuBar(self):
         self.menuBar = ctk.CTkTabview(self, fg_color='#292b31')
         self.menuBar.pack(expand = True, fill = "both")

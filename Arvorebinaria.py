@@ -1,6 +1,13 @@
 from Libs import *
+from Arvorebinaria import *
+import customtkinter as ctk
+
 
 ctk.set_appearance_mode("dark")
+
+
+
+
 ctk.set_default_color_theme("dark-blue")
 
 
@@ -139,49 +146,59 @@ class ArvoreBinariaBusca(BinaryTree):
 
 ####################################################3  CTkCanvas
 
-class TreeVisualizer(ctk.CTkScrollableFrame):
+class TreeVisualizer(ctk.CTkFrame):
     def __init__(self, master=None, tree=None):
         super().__init__(master)
         # self.master = master
         self.tree = tree
         # self.master.title("Visualização da Árvore Binária")
-        self.canvas_width = 800
-        self.canvas_height = 650
-        self.create_widgets()
+        self.canvas_width = 1000
+        self.canvas_height =600
         
-    def create_widgets(self):
+        #Criando o menuBar
+    
+    
+        self.create_widgets()
 
-
+        
+    def create_widgets(self):        
         self.canvas = ctk.CTkCanvas(self)
         self.canvas.pack(expand=True, fill=ctk.BOTH)
-
+        
+        scrollbar = tk.Scrollbar(self.canvas, orient=ctk.VERTICAL)
+        scrollbar.pack(side=ctk.RIGHT, fill=ctk.Y)
+        scrollbar.config(command=self.canvas.yview)
+        
+        
+        
         # Frame para entrada de dados
-        input_frame = ctk.CTkFrame(self, height=200, width=500)
-        input_frame.pack(pady=20)
+        input_frame = ctk.CTkFrame(self,fg_color='#292b31')
+        input_frame.pack()
 
-        self.entry_valor = ctk.CTkEntry(input_frame,placeholder_text='Insira um valor na árvore',  font=("", 14))
-        self.entry_valor.pack(side=ctk.LEFT,padx=2)       
-        btn_inserir = ctk.CTkButton(input_frame, text="Inserir", command=self.inserir_valor)
+        self.entry_valor = ctk.CTkEntry(input_frame,placeholder_text='Insira um valor na árvore',width=180,  font=("", 12))
+        self.entry_valor.pack(side=ctk.LEFT, pady=10)       
+        btn_inserir = ctk.CTkButton(input_frame, text="Inserir", command=self.inserir_valor, font=("",14))
         btn_inserir.pack(side=ctk.LEFT,padx=10)
         ## botao remover nó
-        btn_remover= ctk.CTkButton(input_frame, text="remover", command=self.remover_valor)
+        btn_remover= ctk.CTkButton(input_frame, text="remover", command=self.remover_valor, font=("",14))
         btn_remover.pack(side=ctk.LEFT, padx=10)
 
-        
+
         # Frame para exibição dos percursos
         percurso_frame = ctk.CTkFrame(self)
-        percurso_frame.pack(pady=10)
+        percurso_frame.pack()
 
-        self.txt_em_ordem = ctk.CTkTextbox(percurso_frame, width=400, height=300, wrap=ctk.WORD)
-        self.txt_em_ordem.pack(side=ctk.LEFT, padx=10)
-        
-        
-        self.txt_pre_ordem = ctk.CTkTextbox(percurso_frame, width=400, height=300, wrap=ctk.WORD)
-        self.txt_pre_ordem.pack(side=ctk.LEFT, padx=10)
-        
-        self.txt_pos_ordem = ctk.CTkTextbox(percurso_frame, width=400, height=300, wrap=ctk.WORD)
-        self.txt_pos_ordem.pack(side=ctk.LEFT, padx=10)
 
+        self.txt_em_ordem = ctk.CTkTextbox(percurso_frame,fg_color='#292b31', width=450,height=100,wrap=ctk.WORD, font=("", 18))
+        self.txt_em_ordem.pack(side=ctk.LEFT, padx=10, pady=10)
+        
+        
+        self.txt_pre_ordem = ctk.CTkTextbox(percurso_frame,fg_color='#292b31', width=450, height=100, wrap=ctk.WORD,font=("", 18))
+        self.txt_pre_ordem.pack(side=ctk.LEFT, padx=10,pady=10)
+        
+        self.txt_pos_ordem = ctk.CTkTextbox(percurso_frame,fg_color='#292b31', width=450, height=100, wrap=ctk.WORD,font=("", 18))
+        self.txt_pos_ordem.pack(side=ctk.LEFT, padx=10,pady=10)
+       
 
         
         self.draw_tree()
@@ -208,7 +225,7 @@ class TreeVisualizer(ctk.CTkScrollableFrame):
     def draw_node(self, node, x, y, h_space):
         if node.left:
             x_left = x - h_space
-            y_left = y + 100
+            y_left = y + 20
             self.canvas.create_line(x, y, x_left, y_left, width=2)
             self.draw_node(node.left, x_left, y_left, h_space // 2)
         
@@ -254,7 +271,7 @@ class TreeVisualizer(ctk.CTkScrollableFrame):
         else:
                 print(f"O valor {valor} não foi encontrado na árvore.")
         #else:
-        #    print("Valor inválido. Insira um número inteiro.")
+        #    print("Valor inválido. Insira um núgitmero inteiro.")
     
 
         
